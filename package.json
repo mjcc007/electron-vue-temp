@@ -1,0 +1,67 @@
+{
+  "name": "electron-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "start": "electron ./electron/main.js",
+    "devall": "concurrently \"npm run dev\" \"npm run start\"",
+    "dev:ele": "chcp 65001 && vite",
+    "build:ele": "vue-tsc && vite build && electron-builder"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "vue": "^3.4.37"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "electron": "^32.0.1",
+    "electron-builder": "^24.13.3",
+    "electron-devtools-installer": "^3.2.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vite-plugin-electron": "^0.28.7",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vue-tsc": "^2.0.29"
+  },
+  "build": {
+    "appId": "com.a1.a",
+    "productName": "electronTest",
+    "copyright": "Copyright © 2023",
+    "artifactName": "electronTest.exe",
+    "win": {
+      "icon": "public/logo.png",
+      "target": {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "electron_dist"
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "https://**"
+    }
+  }
+}
